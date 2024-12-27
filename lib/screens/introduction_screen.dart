@@ -1,25 +1,27 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evently_app/screens/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/my_provider.dart';
 
-class IntroductionScreen extends StatefulWidget {
+class IntoScreen extends StatefulWidget {
   static const String routeName = "introductionScreen";
-  IntroductionScreen({super.key});
+
+  IntoScreen({super.key});
 
   @override
-  State<IntroductionScreen> createState() => _IntroductionScreenState();
+  State<IntoScreen> createState() => _IntoScreenState();
 }
 
-class _IntroductionScreenState extends State<IntroductionScreen> {
+class _IntoScreenState extends State<IntoScreen> {
   @override
   bool langMode = false;
   bool themeMode = false;
 
   Widget build(BuildContext context) {
-    var provider=Provider.of<MyProvider>(context);
+    var provider = Provider.of<MyProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -34,12 +36,12 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Image.asset("assets/images/onboarding1.png"),
+              Image.asset("assets/images/intro_image.png"),
               SizedBox(
                 height: 28,
               ),
               Text(
-                  "intor_title".tr(),
+                "intor_title".tr(),
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               SizedBox(
@@ -63,9 +65,9 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                   InkWell(
                       onTap: () {
                         langMode = !langMode;
-                        if(langMode==false){
+                        if (langMode == false) {
                           context.setLocale(Locale("en"));
-                        }else{
+                        } else {
                           context.setLocale(Locale("ar"));
                         }
                         setState(() {});
@@ -100,7 +102,9 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                 height: 28,
               ),
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, OnBoardingScreen.routeName);
+                  },
                   child: Text(
                     "lets_start".tr(),
                     style: Theme.of(context)
@@ -115,7 +119,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
     );
   }
 
-  Widget _modeButton(BuildContext context, {required bool mode, required String image1, required String image2}) {
+  Widget _modeButton(BuildContext context,
+      {required bool mode, required String image1, required String image2}) {
     return Container(
         height: 30,
         width: 73,

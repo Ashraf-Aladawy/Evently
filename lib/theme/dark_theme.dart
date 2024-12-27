@@ -16,8 +16,12 @@ class DarkTheme extends BaseTheme {
   Color get textColor => Colors.white;
 
   @override
+  Color get pointColor => Color(0xffF4EBDC);
+
+  @override
   ThemeData get themeData => ThemeData(
       scaffoldBackgroundColor: backGroundColor,
+      cardColor: Color(0xffF4EBDC),
       appBarTheme: AppBarTheme(
         backgroundColor: backGroundColor,
         centerTitle: true,
@@ -42,13 +46,10 @@ class DarkTheme extends BaseTheme {
           unselectedLabelStyle: TextStyle()),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: primaryColor,
+              backgroundColor: primaryColor,
               padding: EdgeInsets.symmetric(vertical: 16),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16)
-              )
-          )
-      ),
+                  borderRadius: BorderRadius.circular(16)))),
       textTheme: TextTheme(
           titleMedium: GoogleFonts.inter(
             fontSize: 20,
@@ -62,8 +63,7 @@ class DarkTheme extends BaseTheme {
           ),
           labelSmall: GoogleFonts.inter(
             fontSize: 16,
-            fontWeight:FontWeight.w500,
+            fontWeight: FontWeight.w500,
             color: textColor,
-          )
-      ));
+          )));
 }

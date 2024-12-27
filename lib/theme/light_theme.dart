@@ -18,6 +18,7 @@ class LightTheme extends BaseTheme {
   @override
   ThemeData get themeData => ThemeData(
       scaffoldBackgroundColor: backGroundColor,
+      cardColor: Color(0xff1c1c1c),
       appBarTheme: AppBarTheme(
         backgroundColor: backGroundColor,
         centerTitle: true,
@@ -41,29 +42,25 @@ class LightTheme extends BaseTheme {
           ),
           unselectedLabelStyle: TextStyle()),
       elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: primaryColor,
-          padding: EdgeInsets.symmetric(vertical: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16)
-          )
-        )
-      ),
+          style: ElevatedButton.styleFrom(
+              backgroundColor: primaryColor,
+              padding: EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16)))),
       textTheme: TextTheme(
-        titleMedium: GoogleFonts.inter(
-          fontSize: 20,
-          fontWeight: FontWeight.w500,
-          color: primaryColor,
-        ),
-        bodySmall: GoogleFonts.inter(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          color: textColor,
-        ),
-        labelSmall: GoogleFonts.inter(
-          fontSize: 16,
-          fontWeight:FontWeight.w500,
-          color: Color(0xff7B7B7B),
-        )
-      ));
+          titleMedium: GoogleFonts.inter(
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            color: primaryColor,
+          ),
+          bodySmall: GoogleFonts.inter(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: textColor,
+          ),
+          labelSmall: GoogleFonts.inter(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: Color(0xff7B7B7B),
+          )));
 }
