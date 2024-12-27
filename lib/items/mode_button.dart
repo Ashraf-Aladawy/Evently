@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ModeButton{
-  static Widget modeButton(BuildContext context,
-      {required bool mode,}) {
+  static Widget modeButton(BuildContext context, {required bool mode}) {
     return Container(
         height: 30,
         width: 73,

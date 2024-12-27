@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:evently_app/cache_helper/mode_button.dart';
+import 'package:evently_app/items/mode_button.dart';
 import 'package:evently_app/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -32,13 +32,13 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 24, bottom: 16),
-              child: TextFiledItem(
+              child: TextFieldItem(
                 lable: "Email",
                 prefixIcon:
                     ImageIcon(AssetImage("assets/images/email_icon.png")),
               ),
             ),
-            TextFiledItem(
+            TextFieldItem(
               lable: "Password",
               prefixIcon: ImageIcon(AssetImage("assets/images/lock.png")),
               suffixIcon: Icon(Icons.visibility_off),

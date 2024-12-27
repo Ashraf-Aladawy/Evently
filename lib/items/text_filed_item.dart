@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TextFiledItem extends StatelessWidget {
-  TextFiledItem(
+class TextFieldItem extends StatelessWidget {
+  TextFieldItem(
       {super.key,
       required this.lable,
       this.prefixIcon = null,
