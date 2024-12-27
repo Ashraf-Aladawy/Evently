@@ -18,7 +18,8 @@ class LightTheme extends BaseTheme {
   @override
   ThemeData get themeData => ThemeData(
       scaffoldBackgroundColor: backGroundColor,
-      cardColor: Color(0xff1c1c1c),
+      cardColor: Color(0xff7B7B7B),
+      dividerColor: Color(0xff1c1c1c),
       appBarTheme: AppBarTheme(
         backgroundColor: backGroundColor,
         centerTitle: true,
