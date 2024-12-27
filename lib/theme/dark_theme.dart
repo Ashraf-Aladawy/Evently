@@ -21,7 +21,9 @@ class DarkTheme extends BaseTheme {
   @override
   ThemeData get themeData => ThemeData(
       scaffoldBackgroundColor: backGroundColor,
-      cardColor: Color(0xffF4EBDC),
+      primaryColor: primaryColor,
+      cardColor: primaryColor,
+      dividerColor: Color(0xffF4EBDC),
       appBarTheme: AppBarTheme(
         backgroundColor: backGroundColor,
         centerTitle: true,

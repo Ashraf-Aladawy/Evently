@@ -116,7 +116,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       width: 8,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(36),
-        color: Theme.of(context).cardColor,
+        color: Theme.of(context).dividerColor,
       ),
     );
   }

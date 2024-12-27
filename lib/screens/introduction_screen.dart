@@ -105,10 +105,8 @@ class _IntoScreenState extends State<IntoScreen> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    CacheHelper.getOnBoarding() == true
-                        ? Navigator.pushNamed(context, LoginScreen.routeName)
-                        : Navigator.pushNamed(
-                            context, OnBoardingScreen.routeName);
+
+                         Navigator.pushNamed(context, OnBoardingScreen.routeName);
                   },
                   child: Text(
                     "lets_start".tr(),
