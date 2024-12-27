@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evently_app/cache_helper/cache_helper.dart';
 import 'package:evently_app/provider/my_provider.dart';
 import 'package:evently_app/screens/introduction_screen.dart';
 import 'package:evently_app/screens/login_screen.dart';
@@ -11,6 +12,7 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await CacheHelper.init();
   await EasyLocalization.ensureInitialized();
   runApp(EasyLocalization(
     supportedLocales: [

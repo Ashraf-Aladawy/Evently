@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evently_app/cache_helper/cache_helper.dart';
 import 'package:evently_app/screens/introduction_screen.dart';
 import 'package:evently_app/screens/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -82,6 +83,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   if (index < 2) {
                     index++;
                   } else {
+                    CacheHelper.saveOnBording();
                     Navigator.pushReplacementNamed(
                         context, LoginScreen.routeName);
                   }

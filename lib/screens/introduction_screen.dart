@@ -1,4 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evently_app/cache_helper/cache_helper.dart';
+import 'package:evently_app/screens/login_screen.dart';
 import 'package:evently_app/screens/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -103,7 +105,10 @@ class _IntoScreenState extends State<IntoScreen> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, OnBoardingScreen.routeName);
+                    CacheHelper.getOnBoarding() == true
+                        ? Navigator.pushNamed(context, LoginScreen.routeName)
+                        : Navigator.pushNamed(
+                            context, OnBoardingScreen.routeName);
                   },
                   child: Text(
                     "lets_start".tr(),
