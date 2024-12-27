@@ -18,14 +18,15 @@ class LightTheme extends BaseTheme {
   @override
   ThemeData get themeData => ThemeData(
       scaffoldBackgroundColor: backGroundColor,
+      primaryColor: primaryColor,
       cardColor: Color(0xff7B7B7B),
       dividerColor: Color(0xff1c1c1c),
       appBarTheme: AppBarTheme(
         backgroundColor: backGroundColor,
         centerTitle: true,
         iconTheme: IconThemeData(
-          color: backGroundColor,
-          size: 16,
+          color: Color(0xff000000),
+          size: 24,
         ),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(

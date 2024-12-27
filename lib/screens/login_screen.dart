@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evently_app/items/mode_button.dart';
+import 'package:evently_app/screens/forget_pass_screen.dart';
 import 'package:evently_app/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -49,7 +50,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, ForgetPassScreen.routeName);
+                    },
                     child: Text(
                       "Forget Password?",
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:evently_app/cache_helper/cache_helper.dart';
 import 'package:evently_app/provider/my_provider.dart';
+import 'package:evently_app/screens/forget_pass_screen.dart';
 import 'package:evently_app/screens/introduction_screen.dart';
 import 'package:evently_app/screens/login_screen.dart';
 import 'package:evently_app/screens/on_boarding_screen.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
         OnBoardingScreen.routeName: (context) => OnBoardingScreen(),
         LoginScreen.routeName: (context) => LoginScreen(),
         RegisterScreen.routeName: (context) => RegisterScreen(),
+        ForgetPassScreen.routeName: (context) => ForgetPassScreen(),
       },
     );
   }
