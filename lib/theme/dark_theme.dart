@@ -36,16 +36,22 @@ class DarkTheme extends BaseTheme {
           backgroundColor: backGroundColor,
           showSelectedLabels: true,
           showUnselectedLabels: true,
+          unselectedItemColor: Colors.white,
+          selectedItemColor: Colors.white,
           selectedIconTheme: IconThemeData(
             color: Colors.white,
           ),
+          unselectedIconTheme: IconThemeData(color: Colors.white),
           type: BottomNavigationBarType.fixed,
           selectedLabelStyle: GoogleFonts.inter(
             fontSize: 12,
             fontWeight: FontWeight.w700,
             color: Colors.white,
           ),
-          unselectedLabelStyle: TextStyle()),
+          unselectedLabelStyle:GoogleFonts.inter(
+            fontSize: 12,
+            fontWeight: FontWeight.w700,
+          ),),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
               backgroundColor: primaryColor,

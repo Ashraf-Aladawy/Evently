@@ -30,19 +30,25 @@ class LightTheme extends BaseTheme {
         ),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: backGroundColor,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          selectedIconTheme: IconThemeData(
-            color: Colors.white,
-          ),
-          type: BottomNavigationBarType.fixed,
-          selectedLabelStyle: GoogleFonts.inter(
-            fontSize: 12,
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
-          unselectedLabelStyle: TextStyle()),
+        backgroundColor: primaryColor,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        unselectedItemColor: Colors.white,
+        selectedItemColor: Colors.white,
+        selectedIconTheme: IconThemeData(
+          color: Colors.white,
+        ),
+        unselectedIconTheme: IconThemeData(color: Colors.white),
+        type: BottomNavigationBarType.fixed,
+        selectedLabelStyle: GoogleFonts.inter(
+          fontSize: 12,
+          fontWeight: FontWeight.w700,
+        ),
+        unselectedLabelStyle: GoogleFonts.inter(
+          fontSize: 12,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
               backgroundColor: primaryColor,
