@@ -25,7 +25,7 @@ class LightTheme extends BaseTheme {
         backgroundColor: backGroundColor,
         centerTitle: true,
         iconTheme: IconThemeData(
-          color: Color(0xff000000),
+          color: primaryColor,
           size: 24,
         ),
       ),
