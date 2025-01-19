@@ -28,8 +28,8 @@ class DarkTheme extends BaseTheme {
         backgroundColor: backGroundColor,
         centerTitle: true,
         iconTheme: IconThemeData(
-          color: backGroundColor,
-          size: 16,
+          color: primaryColor,
+          size: 24,
         ),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(

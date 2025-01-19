@@ -1,4 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:evently_app/provider/my_provider.dart';
+import 'package:evently_app/screens/create_event_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "HomeScreen";
@@ -19,13 +23,18 @@ class _HomeScreenState extends State<HomeScreen> {
     "Sports",
     "Sports",
   ];
+  var provider;
+  bool langMood = false;
 
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of<MyProvider>(context);
     return Scaffold(
       appBar: _AppBar(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, CreateEventScreen.routeName);
+        },
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(75),
             side: BorderSide(
@@ -144,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
   PreferredSizeWidget _AppBar() {
     return AppBar(
       backgroundColor: Theme.of(context).primaryColor,
-      toolbarHeight: 225,
+      toolbarHeight: 174,
       centerTitle: false,
       title: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -164,23 +173,37 @@ class _HomeScreenState extends State<HomeScreen> {
                     .copyWith(fontSize: 24),
               ),
               Spacer(),
-              Image.asset("assets/images/Sun.png"),
-              Container(
-                width: 35,
-                height: 33,
-                margin: EdgeInsets.only(left: 10, right: 16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
+              InkWell(
+                  onTap: () {
+                    provider.changeTheme();
+                  },
+                  child: Image.asset("assets/images/Sun.png")),
+              InkWell(
+                onTap: () {
+                  langMood = !langMood;
+                  if (langMood == false) {
+                    context.setLocale(Locale("en"));
+                  } else {
+                    context.setLocale(Locale("ar"));
+                  }
+                },
+                child: Container(
+                  width: 35,
+                  height: 33,
+                  margin: EdgeInsets.only(left: 10, right: 16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Center(
+                      child: Text(
+                    langMood == false ? "EN" : "ع",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium!
+                        .copyWith(fontSize: 14),
+                  )),
                 ),
-                child: Center(
-                    child: Text(
-                  "EN",
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium!
-                      .copyWith(fontSize: 14),
-                )),
               )
             ],
           ),
