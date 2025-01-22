@@ -1,28 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evently_app/firebase_functions.dart';
+import 'package:evently_app/items/event_item.dart';
+import 'package:evently_app/models/task_model.dart';
 import 'package:evently_app/provider/my_provider.dart';
 import 'package:evently_app/screens/create_event_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   static const String routeName = "HomeScreen";
 
   HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int currentIndex = 0;
-  int currentcatigor = 0;
-  List<String> categories = [
-    "All",
-    "Birthday",
-    "Sports",
-    "Sports",
-    "Sports",
-  ];
   var provider;
   bool langMood = false;
 
@@ -30,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     provider = Provider.of<MyProvider>(context);
     return Scaffold(
-      appBar: _AppBar(),
+      appBar: _AppBar(context),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, CreateEventScreen.routeName);
@@ -52,8 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 30,
         onTap: (value) {
-          currentIndex = value;
-          setState(() {});
+          provider.changeBarItems(value);
         },
         items: [
           _bottomBarItem("Home", 0),
@@ -62,86 +51,21 @@ class _HomeScreenState extends State<HomeScreen> {
           _bottomBarItem("Profile", 3),
         ],
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) => Padding(
-          padding: const EdgeInsets.only(top: 16, right: 16, left: 16),
-          child: Container(
-            height: 204,
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                Stack(
-                  children: [
-                    ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: Image.asset("assets/images/Holiday.png")),
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      margin: EdgeInsets.only(left: 8, top: 8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.white,
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "21",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(fontWeight: FontWeight.w700),
-                          ),
-                          Text(
-                            "Nov",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                    fontWeight: FontWeight.w700, fontSize: 14),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  width: 345,
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-                  margin: EdgeInsets.only(left: 8, right: 8, bottom: 8),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.white,
-                  ),
-                  child: Row(
-                    children: [
-                      Text(
-                        "This is a Birthday Party ",
-                        textAlign: TextAlign.justify,
-                        maxLines: 2,
-                        softWrap: true,
-                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                            fontWeight: FontWeight.w700, fontSize: 14),
-                      ),
-                      Spacer(),
-                      ImageIcon(
-                        AssetImage("assets/images/fav_icon.png"),
-                        color: Theme.of(context).primaryColor,
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        itemCount: 5,
+      body: StreamBuilder <QuerySnapshot<TaskModel>> (
+          stream : FirebaseFunctions.getEvents(),
+       builder: (context, snapshot) {
+          return ListView.builder(
+            itemBuilder: (context, index) =>EventItem(model:snapshot.data!.docs[index].data()),
+            itemCount: snapshot.data?.docs.length??0,
+          );
+        } ,
+
       ),
     );
   }
 
   BottomNavigationBarItem _bottomBarItem(String lable, int index) {
-    return currentIndex == index
+    return provider.currentIndex == index
         ? BottomNavigationBarItem(
             icon: ImageIcon(AssetImage("assets/images/${lable}_filled.png")),
             label: "$lable")
@@ -150,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
             label: "$lable");
   }
 
-  PreferredSizeWidget _AppBar() {
+  PreferredSizeWidget _AppBar(context) {
     return AppBar(
       backgroundColor: Theme.of(context).primaryColor,
       toolbarHeight: 174,
@@ -229,31 +153,30 @@ class _HomeScreenState extends State<HomeScreen> {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () {
-                  currentcatigor = index;
-                  setState(() {});
+                  provider.changeCategory(index);
                 },
                 child: Container(
                   height: 40,
                   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   decoration: BoxDecoration(
-                      color: currentcatigor == index
+                      color: provider.currentcatigor == index
                           ? Colors.white
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(46),
                       border: Border.all(color: Colors.white, width: 1)),
                   child: Row(
                     children: [
-                      ImageIcon(
-                          AssetImage(
-                              "assets/images/${categories[index]}_icon.png"),
-                          color: currentcatigor == index
-                              ? Theme.of(context).primaryColor
-                              : Colors.white),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Text("${categories[index]}",
-                          style: currentcatigor == index
+                      // ImageIcon(
+                      //     AssetImage(
+                      //         "assets/images/${provider.categories[index]}_icon.png"),
+                      //     color: provider.currentcatigor == index
+                      //         ? Theme.of(context).primaryColor
+                      //         : Colors.white),
+                      // SizedBox(
+                      //   width: 8,
+                      // ),
+                      Text("${provider.categories[index]}",
+                          style: provider.currentcatigor == index
                               ? Theme.of(context)
                                   .textTheme
                                   .titleSmall!
@@ -268,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              itemCount: categories.length,
+              itemCount: provider.categories.length,
             ),
           ),
         ],
@@ -279,4 +202,5 @@ class _HomeScreenState extends State<HomeScreen> {
               bottomLeft: Radius.circular(24))),
     );
   }
+
 }
