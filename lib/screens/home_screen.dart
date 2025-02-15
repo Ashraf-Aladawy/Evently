@@ -15,7 +15,6 @@ class HomeScreen extends StatelessWidget {
 
   var provider;
   bool langMood = false;
-
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<MyProvider>(context);
@@ -51,15 +50,15 @@ class HomeScreen extends StatelessWidget {
           _bottomBarItem("Profile", 3),
         ],
       ),
-      body: StreamBuilder <QuerySnapshot<TaskModel>> (
-          stream : FirebaseFunctions.getEvents(),
-       builder: (context, snapshot) {
+      body: StreamBuilder<QuerySnapshot<TaskModel>>(
+        stream: FirebaseFunctions.getEvents(provider.category),
+        builder: (context, snapshot) {
           return ListView.builder(
-            itemBuilder: (context, index) =>EventItem(model:snapshot.data!.docs[index].data()),
-            itemCount: snapshot.data?.docs.length??0,
+            itemBuilder: (context, index) =>
+                EventItem(model: snapshot.data!.docs[index].data()),
+            itemCount: snapshot.data?.docs.length ?? 0,
           );
-        } ,
-
+        },
       ),
     );
   }
@@ -202,5 +201,4 @@ class HomeScreen extends StatelessWidget {
               bottomLeft: Radius.circular(24))),
     );
   }
-
 }

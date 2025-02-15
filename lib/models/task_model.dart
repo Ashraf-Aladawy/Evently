@@ -5,7 +5,7 @@ class TaskModel {
   String imageName;
   String time;
   int date;
-
+  String userId;
 
   TaskModel(
       {this.id = "",
@@ -13,16 +13,18 @@ class TaskModel {
       required this.description,
       required this.imageName,
       required this.date,
-      required this.time});
+      required this.time,
+      required this.userId});
 
- static TaskModel fromjson(Map<String, dynamic> json) {
+  static TaskModel fromjson(Map<String, dynamic> json) {
     return TaskModel(
       id: json["id"],
-        title: json["title"],
-        description: json["description"],
-        imageName: json["imageName"],
-        date: json["date"],
-        time: json["time"],
+      title: json["title"],
+      description: json["description"],
+      imageName: json["imageName"],
+      date: json["date"],
+      time: json["time"],
+      userId: json["userId"]
     );
   }
 
@@ -33,7 +35,8 @@ class TaskModel {
       "description": model.description,
       "imageName": model.imageName,
       "date": model.date,
-      "time": model.time
+      "time": model.time,
+      "userId":model.userId
     };
   }
 }

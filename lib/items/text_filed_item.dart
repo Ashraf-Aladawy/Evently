@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 
 class TextFieldItem extends StatelessWidget {
@@ -5,13 +7,24 @@ class TextFieldItem extends StatelessWidget {
       {super.key,
       required this.lable,
       this.prefixIcon = null,
-      this.suffixIcon = null});
+      this.suffixIcon = null,
+        this.controller,
+        required this.validate,
+        this.isObscure=false,
+
+      });
   String lable;
   Widget? prefixIcon;
   Widget? suffixIcon;
+  TextEditingController? controller;
+  Function validate;
+  bool isObscure;
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: (value) => validate(value),
+      controller:controller ,
+      obscureText: isObscure ,
       decoration: InputDecoration(
         hintText: lable,
         hintStyle: Theme.of(context).textTheme.labelSmall,
