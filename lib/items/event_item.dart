@@ -12,7 +12,7 @@ class EventItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 16, right: 16, left: 16),
       child: Container(
-        height: 204,
+        height: 230,
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
@@ -20,7 +20,11 @@ class EventItem extends StatelessWidget {
               children: [
                 ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: Image.asset("assets/images/${model.imageName}.png")),
+                    child: Image.asset(
+                      "assets/images/${model.imageName}.png",
+                      height: 230,
+                      fit: BoxFit.fill,
+                    )),
                 Container(
                   padding: EdgeInsets.all(8),
                   margin: EdgeInsets.only(left: 8, top: 8),
