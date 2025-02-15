@@ -26,6 +26,7 @@ class ForgetPassScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 24),
                 child: TextFieldItem(
+                  validate: (){},
                   lable: "Email",
                   prefixIcon: ImageIcon(
                     AssetImage("assets/images/email_icon.png"),

@@ -18,7 +18,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool langMode = false;
-
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,12 +38,16 @@ class _LoginScreenState extends State<LoginScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 24, bottom: 16),
                 child: TextFieldItem(
+                  controller: emailController,
+                  validate: () {},
                   lable: "Email",
                   prefixIcon:
                       ImageIcon(AssetImage("assets/images/email_icon.png")),
                 ),
               ),
               TextFieldItem(
+                controller: passwordController,
+                validate: () {},
                 lable: "Password",
                 prefixIcon: ImageIcon(AssetImage("assets/images/lock.png")),
                 suffixIcon: Icon(Icons.visibility_off),
@@ -71,8 +76,46 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(
-                        context, HomeScreen.routeName);
+                    print(emailController);
+                    FirebaseFunctions.logIn(
+                      emailAddress: emailController.text,
+                      password: passwordController.text,
+                      onLoading: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Center(child: CircularProgressIndicator()),
+                            backgroundColor: Colors.transparent,
+                          ),
+                        );
+                      },
+                      onSuccess: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          HomeScreen.routeName,
+                          (route) => false,
+                        );
+                      },
+                      onError: (massage) {
+                        Navigator.pop(context);
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text("Some thing went Wrong"),
+                            content: Text(massage),
+                            actions: [
+                              ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.white),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Ok")),
+                            ],
+                          ),
+                        );
+                      },
+                    );
                   },
                   child: Text(
                     "Log in",
@@ -88,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Text(
                       "Don’t Have Account ?",
-                      style: Theme.of(context).textTheme.titleSmall,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                     TextButton(
                       onPressed: () {

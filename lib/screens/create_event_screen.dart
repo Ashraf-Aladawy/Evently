@@ -3,6 +3,7 @@ import 'package:evently_app/firebase_functions.dart';
 import 'package:evently_app/models/task_model.dart';
 import 'package:evently_app/provider/create_events_provider.dart';
 import 'package:evently_app/screens/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -201,6 +202,7 @@ class CreateEventScreen extends StatelessWidget {
                     child: ElevatedButton(
                         onPressed: () {
                           FirebaseFunctions.addEvent(TaskModel(
+                            userId: FirebaseAuth.instance.currentUser!.uid,
                                   title: titleController.text,
                                   description: descriptionController.text,
                                   imageName: provider

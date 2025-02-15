@@ -6,12 +6,16 @@ class MyProvider extends ChangeNotifier{
   ThemeMode themeMode = ThemeMode.light;
   int currentIndex = 0;
   int currentcatigor = 0;
+  String category="";
   List<String> categories = [
     "All",
     "Birthday",
+    "Meeting",
     "Sport",
-    "Sport",
-    "Sport",
+    "Holiday",
+    "Work Shop",
+    "Exhibition",
+    "Eating",
   ];
 
    void changeTheme(){
@@ -25,10 +29,13 @@ class MyProvider extends ChangeNotifier{
 
 void changeBarItems(int index){
      currentIndex=index;
+     category=categories[index];
      notifyListeners();
 }
 void changeCategory(int index){
      currentcatigor=index;
+     category=categories[currentcatigor];
      notifyListeners();
 }
+
 }
